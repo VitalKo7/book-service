@@ -1,10 +1,6 @@
 package ait.cohort34.book.model;
 
-import ait.cohort34.book.dto.AuthorDto;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
@@ -15,14 +11,25 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(of = "isbn")
 @Entity
+@Table(name = "book")
 public class Book {
     @Id
+    @Column(name = "isbn")
     String isbn;
+
+    @Column(name = "title")
     String title;
 
     @ManyToMany
+    @JoinTable(
+            name = "book_authors",
+            joinColumns = @JoinColumn(name = "book_isbn"),
+            inverseJoinColumns = @JoinColumn(name = "authors_name")
+
+    )
     Set<Author> authors;
 
     @ManyToOne
+            // TODO
     Publisher publisher;
 }
