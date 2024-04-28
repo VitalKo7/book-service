@@ -30,6 +30,6 @@ public class Book {
     Set<Author> authors;
 
     @ManyToOne
-            // TODO
+    @JoinColumn(name = "publisher_publisher_name")
     Publisher publisher;
 }
